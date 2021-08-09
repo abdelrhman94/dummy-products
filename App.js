@@ -1,21 +1,28 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from "react";
+import { ScrollView, StyleSheet } from "react-native";
+import Constants from "expo-constants";
+import Card from "./components/Card";
+import { productsApi } from "./products";
 
 export default function App() {
+  const products = productsApi();
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <ScrollView contentContainerStyle={styles.container}>
+      {products.map((product) => {
+        return <Card product={product} />;
+      })}
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: "center",
+    paddingTop: Constants.statusBarHeight,
+    alignItems: "center",
+    backgroundColor: "#ecf0f1",
+    padding: 8,
   },
 });
